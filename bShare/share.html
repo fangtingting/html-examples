@@ -1,0 +1,70 @@
+﻿<html>
+<head>
+<script src="js/jquery-1.12.3.min.js"></script>
+  <!-- uuid是购买后给的 -->
+<script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#style=-1&amp;uuid=ad5f2605-2080-4feb-9bc3-6663d31a6e65&amp;pophcol=2&amp;lang=zh"></script>
+<script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
+</head>
+<style type="text/css">
+  a{
+    text-decoration: none;
+  }
+</style>
+<body>
+  <!--自定义分享,会根据后面传入的数值取出bShare.addEntry里的文章(一个页面有多篇文章要分享)，如果就是分享当前页就用普通的方式就可以-->
+  <div>
+    <p><a class="text3 postHeader" href="#">content</a></p>
+    <p class="text3 postBody">content</p>
+    <span>
+     <a class="sharebtn weixin" href="http://www.bshare.cn/share"  title="分享到微信" onclick="javascript:bShare.share(event,'weixin',0);return false;">
+       <img src="images/weixin02.png" />
+     </a>
+     <a class="sharebtn weibo" href="http://www.bshare.cn/share"  title="分享到新浪微博" onclick="javascript:bShare.share(event,'sinaminiblog',0);return false;">
+      <img src="images/weibo02.png" />
+    </a>
+    <a class="sharebtn QQ" href="http://www.bshare.cn/share" title="分享到QQ空间" onclick="javascript:bShare.share(event,'qzone',0);return false;" >
+     <img src="images/QQ02.png" />
+   </a>
+  </span>
+  </div>
+  <div>
+    <a class="text3 postHeader" href="#2">content2</a>
+    <p class="text3 postBody">content2</p>
+    <span>
+     <a class="sharebtn weixin" href="http://www.bshare.cn/share"  title="分享到微信" onclick="javascript:bShare.share(event,'weixin',1);return false;">
+       <img src="images/weixin02.png" />
+     </a>
+     <a class="sharebtn weibo" href="http://www.bshare.cn/share"  title="分享到新浪微博" onclick="javascript:bShare.share(event,'sinaminiblog',1);return false;">
+      <img src="images/weibo02.png" />
+    </a>
+    <a class="sharebtn QQ" href="http://www.bshare.cn/share" title="分享到QQ空间" onclick="javascript:bShare.share(event,'qzone',1);return false;" >
+     <img src="images/QQ02.png" />
+   </a>
+  </span>
+  </div>
+<script type="text/javascript">
+  var headers = $(".postHeader"), posts = $(".postBody");
+$.each(headers, function(i, h) { // 遍历所有文章标题元素
+  bShare.addEntry({
+        title:$(h).text(), // 获取文章标题
+        url:"http://www.archcy.com"+$(h).href, // 获取文章链接
+        summary:$(posts[i]).text(), // 从postBody中获取文章摘要
+      });
+});
+
+
+$(function(){
+
+  $(".sharebtn").hover(function(){
+    var this_img=$(this).find('img');
+    var cname=$(this).attr("class").split(" ");
+    this_img.attr("src","images/"+cname[1]+"01.png");
+  },function() {
+    var this_img=$(this).find('img');
+    var cname=$(this).attr("class").split(" ");
+    this_img.attr("src","images/"+cname[1]+"02.png");
+  });
+});
+</script>
+</body>
+</html>
