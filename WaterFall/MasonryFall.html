@@ -1,0 +1,47 @@
+
+<div class="scroll_container infinite_scroll">
+  <div class="big masonry_brick">content</div>
+  <div class="small masonry_brick">content</div>
+</div>
+<div id="more"><a href="/an_li/alsx_shinei_more?page=1"></a></div>
+
+<script type="text/javascript">
+$(function () { item_masonry(); });
+$(function () {
+  var sp = 1;
+  $(".scroll_container").infinitescroll({
+    navSelector: "#more",
+    nextSelector: "#more a",
+    itemSelector: ".masonry_brick",
+    loading: {
+      msgText: ' ',
+      finishedMsg: '',
+      finished: function () {
+        sp++;
+        if (sp >= 100) { //到第10页结束事件
+          $("#more").remove();
+          $("#infscr-loading").hide(); //默认的加载条
+          $(window).unbind('.infscr');
+        }
+      }
+    }, errorCallback: function () {
+                    $("#page").show();
+    }
+  }, function (newElements) {
+    var $newElems = $(newElements);
+    $('.scroll_container').masonry('appended', $newElems, false);
+    $newElems.fadeIn();
+    item_masonry();
+    $("#infscr-loading").hide();
+    return;
+  });
+});
+function item_masonry() {
+  $('.scroll_container').masonry({
+    itemSelector: '.masonry_brick',
+    columnWidth: 260,
+    gutterWidth: 20
+  });
+}
+
+</script>
